@@ -7,24 +7,21 @@ const client = new Client()
 
 const account = new Account(client);
 
-export async function createuser() {
+export async function createuser(email,password,name) {
     try {
         const user = await account.create(
             ID.unique(),
-            'howareyou@gmail.com',
-            'password'
+            
+            email,
+            password,
+            name
+            // 'howareyou@gmail.com',
+            // 'password'
         ); 
         console.log('User created successfully:', user);
         return user;
     } catch (error) {
-        if(error.message.includes("A user with the same id, email, or phone already exists in this project.")){
-            console.log("user already exist");
-            
-        }
-        else{
-
-            console.error('Error creating user:', error);
-        }
+        throw error;
     }
 }
 
@@ -53,8 +50,8 @@ export async function logout() {
         // console.log(user);
         
         // if(user){
-            await account.deleteSession('current');
-            console.log("User logged out successfully.");
+            const logout = await account.deleteSession('current');
+            console.log("User logged out successfully : ",logout);
         // }
         // else{
             // console.log("Please login");
@@ -73,14 +70,28 @@ export async function getuser() {
     try {
         const user = await account.get();
         // console.log("User found:", user);
-        if(user) return user;
+        return user;
     } catch (error) {
         // console.log("user not found");
         // console.error("Error logging out:", error);
-        return null;
+        throw error;
+    //    console.log("Error Through getuser function :",error);
+       
+       
     }
 }
 
+export async function getsession() {
+    try{
+        const user = await account.getSession(
+            'current' // sessionId
+        );
+        return user;
+    }
+    catch(error){
+       throw error
+    }
 
+}
 
 // export default [createuser,login]

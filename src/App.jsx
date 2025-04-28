@@ -1,82 +1,95 @@
-// import conf from './conf/conf'
 import React from "react";
 import { useEffect, useState } from 'react'
 import Login from "./login/login.jsx";
-// import {getinputvalue} from './commonfunctions/getinputvalue.js'
-
-// import createuser from './appwrite/createuser'
-// import login from './appwrite/login'
-// import logout from './appwrite/logout'
-// import {useDispatch } from 'react-redux'
-// import {createuser,login,logout} from './appwrite/auth.js'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { removeloginsession, setloginsession } from "./redux/slice/login/loginSlice.js";
 import { getuser } from "./appwrite/auth.js";
   import LoadingSpinner from "./component/loading/loadingspinner.jsx"
-// import islogin from './appwrite/islogin'
+  import { Routes, Route } from "react-router"; 
+import Notfound from "./pages/notfound.jsx";
+import Home from "./pages/Home.jsx";
+import Layout from "./component/Layout/Layout.jsx";
+import Trive from "./pages/Trive.jsx"
+import Signup from "./pages/Signup.jsx";
 function App() {
   
   const [loding, setloding] = useState(true);
-  // const [sessionId, setsessionId] = useState('')
-  // const [loginstatus, setloginstatus] = useState('')
-
-
-
-  // const session = {
-  //   sessionId : "",
-  // };
-
-  // useEffect(() => {
-
-  //   console.log(session.sessionId);
-  // }, [session.sessionId])
+  const user = useSelector((state)=>{return state.login.user})  
+  // const user = null;
+  // console.log(user);
   
+  const dispatch = useDispatch()
   
-// const [isLogin, setisisLogin] = useState(false);
-//  const  setislogindetails = async ()=>{
-//   try{
-
-//     const isLogin =await islogin();
-//     setisisLogin(isLogin)
-//   }
-//   catch(error){
-//     console.log("By the setislogindetails",error);
+//   useEffect(() => {
+//     console.log(user);  
     
-//   }
-// }
-  // useEffect(() => {
-
-  //   setislogindetails()
+//     if(user==null){
+//       console.log("logout is running");
+//       dispatch(removeloginsession())
+//       console.log("Please login first");
+      
+//     }
+//     else{
+//       console.log("login is running");
+      
+//       getuser().then((res)=>{
+        
+//         console.log(res);  
+//         dispatch(setloginsession(res))
     
-  // }, [])
-// const usedispatch = ()=>{
-//    useDispatch()
-// }
-const dispatch = useDispatch()
-useEffect(() => {
-  getuser().then((user)=>{
-    if(user){
+//     }).catch((error)=>{
+//       console.log(error);
+//     })
+//     } 
+//     setloding(false)
+   
+// }, [])
+// useEffect(() => {
+//   getuser().then((user)=>{
+//     if(user){
+//       console.log(user);  
+//       dispatch(setloginsession(user))
+//     } else{
+//       dispatch(removeloginsession())
+//       console.log("Please login first");
+//     }
+// }).finally(()=>{
+//   setloding(false)
+// })
+// }, [])
+  useEffect(() => {
+    getuser().then((user)=>{
       dispatch(setloginsession(user))
-    } else {
-      dispatch(removeloginsession())
-    }
-  }).finally(()=>{
+  
+  }).catch(()=>{
+    dispatch(removeloginsession())
+    console.log("Please login first");
+    
+  })
+  .finally(()=>{
     setloding(false)
   })
 }, [])
  
+if(loding){
+  return <LoadingSpinner divheight={'h-screen'} size={"w-12 h-12"} colour={"border-purple-800"} thickness={"border-4"}/>
+}
   return (
     <>
-    {
+     <Routes>
+      <Route path="/" element={<Layout/>}>
+          <Route path="" element={<Home/>}/>
+          <Route path="trive" element={<Trive/>}/>
+      </Route>    
+      <Route path="login" element={<Login/>}/>
+      {/* <Route path="/" element={user?  <Home/> :  <Login/>} />  */}
+      <Route path="/signup" element={<Signup/>} /> 
+      {/* <Route path="/login" element={loding?  <LoadingSpinner/> :  <Login/>} />  */}
+      <Route path="*" element={<Notfound />} />
+    </Routes>
+    {/* {
       loding?  <LoadingSpinner/> :  <Login/>
-    }
-  
-    {/* <button onClick={()=>{createuser()}} className="bg-blue-700 text-orange-400" >create account</button>
-    <div className='bg-blue-700 text-orange-400 w-8 h-10 p-8'>helo</div>
-    <button onClick={()=>{setloading(true); session.sessionId=login(setloading)}} disabled={loading}>{loading?'Loging in....':'Login'}</button>
-    <button onClick={()=>{login()}}>Login</button>
-    <button onClick={()=>{logout()}} >Logout</button>
-    {isLogin.status?"Logout":"Login"} */}
+    } */}
     </>
   )
 }

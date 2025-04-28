@@ -1,5 +1,5 @@
 import { checkerrormessage } from "./checkerrormessage";
-import { login } from "../appwrite/auth";
+import { login,getuser } from "../appwrite/auth";
 import { setloginsession } from "../redux/slice/login/loginSlice";
 
 export const handlelogin = (
@@ -12,17 +12,24 @@ export const handlelogin = (
 ) => {
   if (email && password) {
     setloading(true);
-    login(email, password)
+    seterrormessage(null)
+    setsuccessmessage(null)
+    return login(email, password)
       .then((response) => {
-        console.dir(response);
+        // console.dir(response);
         if(response){
-          dispatch(setloginsession(response));
+          return getuser().then((user)=>{
+               dispatch(setloginsession(user))
+               setsuccessmessage("Logged in successfully.")
+           })
         }
-        setsuccessmessage("Logged in successfully.")
+          // dispatch(setloginsession(response));
       })
       .catch((error) => {
-        console.dir(error);
-        seterrormessage(checkerrormessage(error));
+        // seterrormessage("Password Must be between 8 and 256 characters.")
+        throw error;
+        // console.dir(error);
+        // seterrormessage(checkerrormessage(error));
       })
       .finally(()=>{setloading(false)})
   } else {

@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 // const [loginsession, setloginsession] = useState(null)
 const initialState = {
   islogin : false,
-  userId : null,
+  user : null,
+  status: null,
 }
 
 export const loginSlice = createSlice({
@@ -11,18 +12,21 @@ export const loginSlice = createSlice({
   initialState,
   reducers: {
     setloginsession: (state , action) => {
-      state.userId = action.payload;
-      console.log(action.payload);
+      state.user = action.payload;
+      // console.log(action.payload.$id);
       
       state.islogin = true;
-      console.log("session SUccessfully added");
-      // state.userId && console.log(state.userId);
+      // console.log("session SUccessfully added");
+      // console.log("This is the user :",state.user);
+      // state.user && console.log(state.user);
       
     }
-  ,
-  removeloginsession:(state)=>{
-    state.islogin = false;
-    state.userId = null;
+    ,
+    removeloginsession:(state)=>{
+      state.islogin = false;
+      state.user = null;
+      // console.log("This is the user :",state.user);
+      
   }
   },
 })
