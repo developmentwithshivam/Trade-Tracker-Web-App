@@ -47,7 +47,7 @@ function Header() {
                 className="text-purple-600 text-2xl"
               />
               <h1 className="text-2xl font-bold text-gray-900 tracking-wide">
-                TradeTrack <span className="text-purple-600 font-medium">Journal</span>
+                TradeTracker 
               </h1>
             </div>
             {/* Middle */}

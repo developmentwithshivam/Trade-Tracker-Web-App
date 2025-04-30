@@ -9,7 +9,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const Footer2 = () => {
   return (
-    <footer className="bg-slate-900 text-gray-400 py-12 mt-16 select-none">
+    <footer className="bg-slate-900 text-gray-400 py-12 select-none">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
         {/* Left Section - Logo & About */}
         <div className="flex flex-col gap-4">
