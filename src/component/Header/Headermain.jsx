@@ -81,7 +81,7 @@ function Header() {
             {/* Right */}
             {islogin && (
               <div className="flex justify-center items-center gap-5">
-                <div>
+                <div className="hidden md:block">
                   <AddPostButton />
                 </div>
                 <div
