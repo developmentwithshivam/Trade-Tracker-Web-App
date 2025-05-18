@@ -45,7 +45,7 @@ function Home() {
   return islogin ? (
     <>
       {
-        <div className="flex justify-center overflow-x-hidden px-10 py-10 ">
+        <div className="flex justify-center overflow-x-hidden py-10 ">
           {Loding ? (
             <div className="flex flex-wrap justify-around w-full">
               {SkeletonCount?.map((items) => {

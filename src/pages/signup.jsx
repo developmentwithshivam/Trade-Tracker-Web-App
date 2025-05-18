@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { createuser } from "../appwrite/auth";
 import { Navigate } from "react-router";
 import { checkerrormessage } from "../login/checkerrormessage";
+import PasswordHider from "../component/Password/PasswordHider";
 
 export default function Signup() {
   const [errormessage, seterrormessage] = useState(null);
@@ -28,6 +29,8 @@ export default function Signup() {
      seterrormessage(checkerrormessage(error)); 
     })
   }
+
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="bg-white shadow-lg rounded-2xl p-8 max-w-md w-full">
@@ -54,18 +57,19 @@ export default function Signup() {
               {...register("Email",{required:true})}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-800"
             />
-            {errors.Name && <div className="text-sm text-red-600">This field is required</div>}
+            {errors.Email && <div className="text-sm text-red-600">This field is required</div>}
           </div>
 
           <div>
             <label className="block text-gray-600 mb-1">Password</label>
-            <input
+            {/* <input
               type="password"
               placeholder="••••••••"
               {...register("Password",{required:true})}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-800"
             />
-            {errors.Name && <div className="text-sm text-red-600">This field is required</div>}
+            {errors.Name && <div className="text-sm text-red-600">This field is required</div>} */}
+            <PasswordHider register={register} errors={ errors || false }/>
           </div>
           <div className="text-red-400">{errormessage}</div>
           <button
