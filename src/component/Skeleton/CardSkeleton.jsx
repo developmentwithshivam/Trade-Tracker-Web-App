@@ -2,7 +2,7 @@ import React from "react";
 const CardSkeleton = () => {
   return (<>
   {/* <div className="grid grid-cols-4 "> */}
-    <div className="my-5 max-w-80 rounded-3xl shadow-sm overflow-hidden h-80">
+    <div className="my-5 w-80 rounded-3xl shadow-sm overflow-hidden h-80">
       {/* Skeleton Card */}
       <div className="h-full bg-gray-200 animate-pulse rounded-lg shadow-lg p-4">
         {/* Skeleton Image */}

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function TradeCard({ index, cardImage, date, pairName, notes }) {
   return (
     <>
-      <div className="my-5 max-w-80 bg-gradient-to-br from-purple-100 to-white rounded-3xl shadow-md overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-in-out cursor-pointer">
+      <div className="my-5 w-80  rounded-3xl shadow-md overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-in-out cursor-pointer">
         {/* Image */}
         {cardImage[index]?.href && (
           <div key={cardImage[index].href} className="overflow-hidden">

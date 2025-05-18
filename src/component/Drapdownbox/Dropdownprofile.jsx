@@ -16,7 +16,7 @@ function Dropdownprofile() {
   return (
     <>
       {islogin && (
-        <div className='absolute right-10 top-16 px-3 py-2 min-w-52 borde bg-white shadow hover:cursor-pointer'>
+        <div className='absolute right-10 top-16 px-3 py-2 min-w-52 borde bg-white shadow hover:cursor-pointer z-10'>
         {obj.map((item)=>{
             return <p key={item.optname} className='hover:text-purple-800  pt-1 text-md border-b border-slate-200'>{item.optname}</p>
         })}

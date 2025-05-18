@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import Logout from "../../Logout/Logout";
 import Dropdownprofile from "../Drapdownbox/Dropdownprofile";
 import AddPostButton from "../Button/Addpostbtn";
-import { faChartLine } from "@fortawesome/free-solid-svg-icons";
+import Logo from "../Logo/Logo";
 // import LogoutIcon from '@mui/icons-material/Logout';
 // import Signup from "../OtherPages/Signup";
 // hello
@@ -39,17 +39,9 @@ function Header() {
     <>
       <header className="select-none">
         <nav className="shadow">
-          <div className="flex px-10 py-4 bg-amber-200 justify-between items-center">
+          <div className="flex px-10 py-4  justify-between items-center">
             {/* Left */}
-            <div className="flex items-center gap-2">
-              <FontAwesomeIcon
-                icon={faChartLine}
-                className="text-purple-600 text-2xl"
-              />
-              <h1 className="text-2xl font-bold text-gray-900 tracking-wide">
-                TradeTracker 
-              </h1>
-            </div>
+            <Logo textsize={"text-xl md:text-2xl"} />
             {/* Middle */}
             <div className="lg:flex gap-10 hidden ">
               <ul className="flex gap-5 ">
@@ -72,7 +64,7 @@ function Header() {
               {!user && (
                 <NavLink
                   to="Signup"
-                  className="shadow-xl cursor-pointer bg-purple-900 text-white p-1 pl-7 pr-7 h-9 hover:text-black hover:bg-white rounded-md hidden lg:block"
+                  className=" cursor-pointer bg-purple-800 text-white p-1 pl-7 pr-7 h-9 hover:bg-purple-900 rounded-md hidden lg:block"
                 >
                   Get Started
                 </NavLink>
@@ -91,7 +83,7 @@ function Header() {
                   }}
                 >
                   <div>{user?.name}</div>
-                  <div className=" rounded-full bg-purple-900 w-8 h-8 flex justify-center items-center text-white">
+                  <div className=" rounded-full bg-purple-800 w-8 h-8 flex justify-center items-center text-white">
                     {user?.name?.[0]}
                   </div>
                 </div>
@@ -100,22 +92,29 @@ function Header() {
             {toggle && <Dropdownprofile />}
             {/* Right 2 */}
             {!islogin && (
-              <div className=" w-44 md:w-80 lg:w-64 flex justify-evenly items-center ">
-                <Link to="/login" className="w-auto md:w-24 ">
-                  <Loginbutton word={"Login"} iconname={faRightToBracket} />
+              <>
+                <Link to="/login" className="md:hidden">
+                  <button className="px-6 py-2 border bg-purple-800 text-white hover:bg-purple-50 font-semibold rounded-xl shadow cursor-pointer">
+                    Login
+                  </button>
                 </Link>
+                <div className="  md:flex gap-5 justify-evenly items-center  hidden">
+                  <Link to="/login" className="w-auto md:w-24 ">
+                    <Loginbutton word={"Login"} iconname={faRightToBracket} />
+                  </Link>
 
-                <NavLink to={"Signup"} className="w-auto md:w-28  ">
-                  <Loginbutton word={"SignUp"} iconname={faUserPlus} />
-                </NavLink>
+                  <Link to={"Signup"} className="w-auto md:w-28 ">
+                    <Loginbutton word={"SignUp"} iconname={faUserPlus} />
+                  </Link>
 
-                <div className="lg:hidden flex justify-center items-center">
+                  {/* <div className="lg:hidden flex justify-center items-center">
                   <FontAwesomeIcon
                     icon={faBars}
                     className=" h-6 w-6 text-black hover:text-slate-300  cursor-pointer "
                   />
+                </div> */}
                 </div>
-              </div>
+              </>
             )}
           </div>
         </nav>
