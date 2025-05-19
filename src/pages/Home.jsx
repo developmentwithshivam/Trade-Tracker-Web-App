@@ -35,28 +35,34 @@ function Home() {
   };
 
   useEffect(() => {
-    onMount();
-  }, []);
-
-  useEffect(() => {
-    onMount();
+    if(islogin){
+      onMount();
+    }
   }, [isupdated]);
 
+  
   return islogin ? (
     <>
       {
-        <div className="flex justify-center overflow-x-hidden py-10 ">
+        <div className="flex justify-center overflow-x-hidden py-10 relative z-0">
+          <button
+            className="absolute bottom-6 right-6 w-16 h-16 rounded-full bg-purple-800 text-white text-4xl flex justify-center items-center shadow-md hover:bg-purple-700 transition-all duration-200 z-50"
+          >
+            +
+          </button>
+
           {Loding ? (
             <div className="flex flex-wrap justify-around w-full">
               {SkeletonCount?.map((items) => {
                 return (
-                  <div key={items.$id}>
+                  <div key={items}>
                     <CardSkeleton />
                   </div>
                 );
               })}
             </div>
           ) : (
+           <div>
             <div className="flex flex-wrap justify-around w-full">
               {cardDetails?.map((items, index) => {
                 return (
@@ -72,6 +78,7 @@ function Home() {
                 );
               })}
             </div>
+           </div>
           )}
         </div>
       }
@@ -101,50 +108,51 @@ function Home() {
           </div>
         </div>
       </div> */}
-       <div className="min-h-screen bg-gradient-to-br from-gray-20 to-white flex flex-col items-center justify-center px-6 mt-14 md:mt-0 select-none">
-      <header className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">
-          TradeTracker
-        </h1>
-        <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-          Track your trades effortlessly, analyze performance, and grow as a smarter trader with TradeTracker — your personal trading journal.
-        </p>
-      </header>
-
-      {/* Hero Illustration or Stats Section */}
-      <div className="w-full max-w-5xl flex flex-col-reverse md:flex-row items-center justify-between gap-10 mb-16">
-        <div className="md:w-1/2 text-center md:text-left">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-            Record. Reflect. Improve.
-          </h2>
-          <p className="text-gray-600">
-            Log every trade with details, monitor your progress with powerful analytics, and never miss an opportunity to grow.
+      <div className="min-h-screen bg-gradient-to-br from-gray-20 to-white flex flex-col items-center justify-center px-6 mt-14 md:mt-0 select-none">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">
+            TradeTracker
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+            Track your trades effortlessly, analyze performance, and grow as a
+            smarter trader with TradeTracker — your personal trading journal.
           </p>
-          <div className="mt-6 flex gap-4 justify-center md:justify-start">
-            <Link to="/signup">
-              <button className="px-6 py-3 bg-purple-800 hover:bg-purple-900 text-white font-semibold rounded-xl shadow cursor-pointer">
-                Sign Up
-              </button>
-            </Link>
-            <Link to="/login">
-              <button className="px-6 py-3 bg-white border border-purple-800 text-purple-900 hover:bg-purple-50 font-semibold rounded-xl shadow cursor-pointer">
-                Login
-              </button>
-            </Link>
+        </header>
+
+        {/* Hero Illustration or Stats Section */}
+        <div className="w-full max-w-5xl flex flex-col-reverse md:flex-row items-center justify-between gap-10 mb-16">
+          <div className="md:w-1/2 text-center md:text-left">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+              Record. Reflect. Improve.
+            </h2>
+            <p className="text-gray-600">
+              Log every trade with details, monitor your progress with powerful
+              analytics, and never miss an opportunity to grow.
+            </p>
+            <div className="mt-6 flex gap-4 justify-center md:justify-start">
+              <Link to="/signup">
+                <button className="px-6 py-3 bg-purple-800 hover:bg-purple-900 text-white font-semibold rounded-xl shadow cursor-pointer">
+                  Sign Up
+                </button>
+              </Link>
+              <Link to="/login">
+                <button className="px-6 py-3 bg-white border border-purple-800 text-purple-900 hover:bg-purple-50 font-semibold rounded-xl shadow cursor-pointer">
+                  Login
+                </button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Placeholder for illustration or stats */}
+          <div className="md:w-1/2">
+            <img
+              src="images\Herosection.png"
+              alt="Trading Illustration"
+              className="w-full max-w-md mx-auto"
+            />
           </div>
         </div>
-
-        {/* Placeholder for illustration or stats */}
-        <div className="md:w-1/2">
-          <img
-            src="images\Herosection.png"
-            alt="Trading Illustration"
-            className="w-full max-w-md mx-auto"
-          />
-        </div>
       </div>
-
-    </div>
     </>
   );
 }

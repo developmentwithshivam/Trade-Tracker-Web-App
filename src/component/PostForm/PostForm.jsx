@@ -99,7 +99,7 @@ function PostForm() {
 
   return (
     <>
-      <div className="flex justify-center items-center absolute">
+      <div className="flex justify-center items-center absolute z-10">
         <div
           className="w-screen h-screen bg-black opacity-40"
           onClick={closeform}

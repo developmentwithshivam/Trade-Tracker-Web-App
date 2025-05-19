@@ -27,8 +27,9 @@ export const handlelogin = (
       })
       .catch((error) => {
         // seterrormessage("Password Must be between 8 and 256 characters.")
+        console.dir(error);
+        seterrormessage(error.response.message)
         throw error;
-        // console.dir(error);
         // seterrormessage(checkerrormessage(error));
       })
       .finally(()=>{setloading(false)})
