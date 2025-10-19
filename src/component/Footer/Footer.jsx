@@ -6,17 +6,18 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router";
 
-const Footer2 = () => {
+const Footer = () => {
   return (
-    <footer className="bg-slate-900 text-gray-400 py-12 select-none">
-      <div className="max-w-7xl mx-auto px-6 flex flex-wrap gap-20 justify-center md:justify-around">
+    <footer className="bg-slate-900 py-12 text-gray-400 select-none">
+      <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-20 px-6 md:justify-around">
         {/* Left Section - Logo & About */}
         <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-bold text-white">
             TradeTrack <span className="text-purple-500">Journal</span>
           </h1>
-          <p className="text-sm leading-relaxed max-w-xs">
+          <p className="max-w-xs text-sm leading-relaxed">
             Your trusted partner for recording, reviewing, and growing your
             trading journey. Stay consistent, stay profitable.
           </p>
@@ -24,89 +25,77 @@ const Footer2 = () => {
 
         {/* Middle Section - Useful Links */}
         <div className="flex flex-col gap-4 text-center md:text-left">
-          <h2 className="text-white font-semibold text-lg">Quick Links</h2>
+          <h2 className="text-lg font-semibold text-white">Quick Links</h2>
           <ul className="flex flex-col gap-2 text-sm">
             <li>
-              <a
-                href="#"
-                className="hover:text-purple-400 transition-all duration-300"
+              <Link
+                to="/privacy-policy"
+                className="transition-all duration-300 hover:text-purple-400"
               >
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="hover:text-purple-400 transition-all duration-300"
-              >
+              <Link className="transition-all duration-300 hover:text-purple-400">
                 Terms of Service
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="hover:text-purple-400 transition-all duration-300"
-              >
+              <Link className="transition-all duration-300 hover:text-purple-400">
                 Support
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="hover:text-purple-400 transition-all duration-300"
-              >
+              <Link className="transition-all duration-300 hover:text-purple-400">
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* Right Section - Social Media */}
         <div className="flex flex-col gap-4 text-center md:text-right">
-          <h2 className="text-white font-semibold text-lg">Connect with us</h2>
-          <div className="flex justify-center md:justify-end gap-6 text-xl">
-            <a
-              href="#"
+          <h2 className="text-lg font-semibold text-white">Connect with us</h2>
+          <div className="flex justify-center gap-6 text-xl md:justify-end">
+            <Link
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-purple-400 transition-colors duration-300"
+              className="transition-colors duration-300 hover:text-purple-400"
             >
               <FontAwesomeIcon icon={faGithub} />
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-purple-400 transition-colors duration-300"
+              className="transition-colors duration-300 hover:text-purple-400"
             >
               <FontAwesomeIcon icon={faLinkedin} />
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-purple-400 transition-colors duration-300"
+              className="transition-colors duration-300 hover:text-purple-400"
             >
               <FontAwesomeIcon icon={faTwitter} />
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-purple-400 transition-colors duration-300"
+              className="transition-colors duration-300 hover:text-purple-400"
             >
               <FontAwesomeIcon icon={faEnvelope} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Bottom Divider */}
-      <div className="border-t border-gray-700 mt-10 pt-6 text-center text-xs text-gray-500">
-        &copy; {new Date().getFullYear()} TradeTrack Journal. All rights reserved.
+      <div className="mt-10 border-t border-gray-700 pt-6 text-center text-xs text-gray-500">
+        &copy; {new Date().getFullYear()} TradeTrack Journal. All rights
+        reserved.
       </div>
     </footer>
   );
 };
 
-export default Footer2;
+export default Footer;

@@ -3,14 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-"homepage": "https://developmentwithshivam.github.io/Trade-Tracker-Web-App",
+  "homepage": "https://developmentwithshivam.github.io/Trade-Tracker-Web-App",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
- "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -23,9 +23,15 @@
     "@mui/material": "^7.0.2",
     "@reduxjs/toolkit": "^2.3.0",
     "@tailwindcss/vite": "^4.0.0",
+    "@tanstack/react-query": "^5.90.2",
     "appwrite": "^14.0.1",
     "autoprefixer": "^10.4.20",
     "chart.js": "^4.4.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.542.0",
+    "motion": "^12.23.12",
+    "next-themes": "^0.4.6",
     "postcss": "^8.5.1",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.3.0",
@@ -34,6 +40,8 @@
     "react-redux": "^9.1.2",
     "react-router": "^7.3.0",
     "react-router-dom": "^7.5.3",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
@@ -47,6 +55,9 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "gh-pages": "^6.3.0",
     "globals": "^15.11.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "tw-animate-css": "^1.4.0",
     "vite": "^5.4.10"
   }
 }

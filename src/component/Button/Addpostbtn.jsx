@@ -6,19 +6,17 @@ import { useDispatch } from "react-redux";
 import { setisopen } from "../../redux/slice/Form/PostFromSlice";
 
 function AddPostButton() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const openform = () => {
-    dispatch(setisopen(true))
-};
-  
+    dispatch(setisopen(true));
+  };
+
   return (
     <button
-    onClick={openform}
-      className="cursor-pointer text-sm group flex items-center gap-2 px-5 py-2 bg-purple-800 text-white font-semibold rounded-full shadow"
+      onClick={openform}
+      className="group flex cursor-pointer items-center gap-2 rounded-full bg-purple-800 px-5 py-2 text-sm font-semibold text-white shadow"
     >
-      <FontAwesomeIcon
-        icon={faPlus}
-      />
+      <FontAwesomeIcon icon={faPlus} />
       Add Post
     </button>
   );

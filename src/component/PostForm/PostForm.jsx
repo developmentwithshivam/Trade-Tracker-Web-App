@@ -18,9 +18,9 @@ function PostForm() {
   const [previewimage, setpreviewimage] = useState(null);
   const dispatch = useDispatch();
 
-  const previewimagefunc = (e)=>{
-    setpreviewimage(URL.createObjectURL(e.target.files[0]))
-  }
+  const previewimagefunc = (e) => {
+    setpreviewimage(URL.createObjectURL(e.target.files[0]));
+  };
   const fields = [
     {
       name: "pair",
@@ -99,27 +99,27 @@ function PostForm() {
 
   return (
     <>
-      <div className="flex justify-center items-center absolute z-10">
+      <div className="absolute z-10 flex items-center justify-center">
         <div
-          className="w-screen h-screen bg-black opacity-40"
+          className="h-screen w-screen bg-black opacity-40"
           onClick={closeform}
         ></div>
         <form
           onSubmit={handleSubmit(onsubmit)}
-          className="max-w-md mx-auto bg-white p-6 rounded-xl shadow space-y-4 absolute "
+          className="absolute mx-auto max-w-md space-y-4 rounded-xl bg-white p-6 shadow"
         >
           <Closebtn />
-          <h2 className="text-xl font-bold text-center">Add Trade Entry</h2>
+          <h2 className="text-center text-xl font-bold">Add Trade Entry</h2>
 
           {fields.map((items) => {
             if (items.inputtype === "textarea") {
               return (
                 <textarea
                   key={items.name}
-                  {...register(items.name, { required: true })}
+                  {...register(items.name, { required: false })}
                   placeholder={items?.placeholder}
                   rows={4}
-                  className="w-full px-4 py-2 border rounded"
+                  className="w-full rounded border px-4 py-2"
                 />
               );
             }
@@ -127,11 +127,16 @@ function PostForm() {
               return (
                 <div key={items.name}>
                   <input
-                    {...register(items.name, { required: true, onChange: (e)=>{previewimagefunc(e)} })}
+                    {...register(items.name, {
+                      required: false,
+                      onChange: (e) => {
+                        previewimagefunc(e);
+                      },
+                    })}
                     type={items.type}
                     multiple
                     accept="image"
-                    className="w-full px-4 py-2 border rounded"
+                    className="w-full rounded border-2 border-orange-500 px-4 py-2"
                   />
                   {errors[items.name] && (
                     <div className="text-sm text-red-600">
@@ -144,10 +149,10 @@ function PostForm() {
             return (
               <div key={items.name}>
                 <input
-                  {...register(items.name, { required: true })}
+                  {...register(items.name, { required: false })}
                   type={items.type}
                   placeholder={items?.placeholder}
-                  className="w-full px-4 py-2 border rounded"
+                  className="w-full rounded border px-4 py-2"
                 />
                 {errors[items.name] && (
                   <div className="text-sm text-red-600">
@@ -157,10 +162,12 @@ function PostForm() {
               </div>
             );
           })}
-          {previewimage && <img src={previewimage} alt="Preview img" className="w-20 h-20" />}
+          {previewimage && (
+            <img src={previewimage} alt="Preview img" className="h-20 w-20" />
+          )}
           <button
             type="submit"
-            className="w-full h-auto hover:cursor-pointer bg-purple-600 text-white font-semibold py-2 rounded hover:bg-purple-700 transition "
+            className="h-auto w-full rounded bg-purple-600 py-2 font-semibold text-white transition hover:cursor-pointer hover:bg-purple-700"
           >
             {loding && (
               <LoadingSpinner

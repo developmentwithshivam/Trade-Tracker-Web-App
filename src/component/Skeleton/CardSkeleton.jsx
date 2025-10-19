@@ -1,30 +1,36 @@
 import React from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 const CardSkeleton = () => {
-  return (<>
-  {/* <div className="grid grid-cols-4 "> */}
-    <div className="my-5 w-80 rounded-3xl shadow-sm overflow-hidden h-80">
-      {/* Skeleton Card */}
-      <div className="h-full bg-gray-200 animate-pulse rounded-lg shadow-lg p-4">
-        {/* Skeleton Image */}
-        <div className="bg-gray-300 h-44 rounded-md mb-4"></div>
+  return (
+    <>
+      <div className="bg-card space-y-4 rounded-2xl border p-4 shadow-sm">
+        {/* Header — profile image + name */}
+        <div className="flex items-center gap-3">
+          <Skeleton className="h-10 w-10 rounded-full" /> {/* profile pic */}
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[120px] rounded-full" /> {/* username */}
+            <Skeleton className="h-3 w-[80px] rounded-full" /> {/* time */}
+          </div>
+        </div>
 
-        {/* Skeleton Text */}
-        <div className="h-5 bg-gray-300 rounded-md mb-2 w-3/4"></div>
-        <div className="h-5 bg-gray-300 rounded-md mb-2"></div>
+        {/* Post image */}
+        <Skeleton className="h-[250px] w-full rounded-xl" />
 
-        {/* Skeleton Footer */}
-        <div className="flex items-center justify-between mt-4">
-          <div className="h-4 bg-gray-300 rounded-md w-1/3"></div>
-          <div className="h-4 bg-gray-300 rounded-md w-1/4"></div>
+        {/* Caption lines */}
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-full rounded-full" />
+          <Skeleton className="h-4 w-[80%] rounded-full" />
+        </div>
+
+        {/* Like / comment / share section */}
+        <div className="flex justify-between pt-2">
+          <Skeleton className="h-4 w-[60px] rounded-full" />
+          <Skeleton className="h-4 w-[60px] rounded-full" />
+          <Skeleton className="h-4 w-[60px] rounded-full" />
         </div>
       </div>
-    </div>
-  {/* </div> */}
-
-  </>
+    </>
   );
 };
 
 export default CardSkeleton;
-
-

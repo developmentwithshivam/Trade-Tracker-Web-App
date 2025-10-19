@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { handlelogin } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye,faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { replace } from "react-router";
+import { toast } from "sonner";
 function login() {
   const [email, setemail] = useState("");
   const [errormessage, seterrormessage] = useState("");
@@ -21,22 +23,28 @@ function login() {
       setsuccessmessage,
       email,
       password,
-      dispatch
+      dispatch,
     ).then(() => {
-      navigate("/");
+      toast.success("Successfully logged in!", {
+        duration: Infinity,
+        dismissible: true,
+        action: {
+          label: "Close",
+          onClick: () => toast.dismiss(),
+        },
+      });
+      navigate("/home-feed", { replace: true });
     });
   };
 
-  const togglepasswordvesibility = ()=>{
-    console.log("run");
-    
-    setpasswordvesibility((prev)=>!prev)
-  }
+  const togglepasswordvesibility = () => {
+    setpasswordvesibility((prev) => !prev);
+  };
 
   return (
-    <div className="flex items-center justify-center min-w-screen min-h-screen md:bg-gray-100 select-none ">
-      <div className="w-full max-w-md md:bg-white rounded-lg md:shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+    <div className="flex min-h-screen min-w-screen items-center justify-center select-none md:bg-gray-100">
+      <div className="w-full max-w-md rounded-lg p-8 md:bg-white md:shadow-lg">
+        <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
           Welcome Back
         </h2>
         <form
@@ -59,7 +67,7 @@ function login() {
               onChange={(e) => {
                 setemail(e.target.value);
               }}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-800"
+              className="mt-2 w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-purple-800 focus:outline-none"
             />
           </div>
           <div className="mb-4">
@@ -69,20 +77,26 @@ function login() {
             >
               Password
             </label>
-            <div className="flex relative">
+            <div className="relative flex">
               <input
-              type={passwordvesibility?"text":"password"}
+                type={passwordvesibility ? "text" : "password"}
                 id="password"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => {
                   setpassword(e.target.value);
                 }}
-                className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-800"
+                className="mt-2 w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-purple-800 focus:outline-none"
               />
-              <div onClick={togglepasswordvesibility} className="w-8 h-8 text-center rounded-full absolute right-3 top-4 cursor-pointer">
-             {passwordvesibility? <FontAwesomeIcon icon={faEye} />:<FontAwesomeIcon icon={faEyeSlash} />
-}
+              <div
+                onClick={togglepasswordvesibility}
+                className="absolute top-4 right-3 h-8 w-8 cursor-pointer rounded-full text-center"
+              >
+                {passwordvesibility ? (
+                  <FontAwesomeIcon icon={faEye} />
+                ) : (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                )}
               </div>
             </div>
           </div>
@@ -94,15 +108,15 @@ function login() {
           )}
           <button
             type="submit"
-            className="w-full px-4 py-2 text-white bg-purple-800 rounded-lg hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-800 hover:cursor-pointer"
+            className={`w-full rounded-lg ${loading ? "cursor-not-allowed bg-purple-500" : "bg-purple-800"} px-4 py-2 text-white hover:cursor-pointer focus:outline-none`}
             onClick={() => {
               handleloginfunc();
             }}
           >
-            {loading ? "Login..." : "Login"}
+            Login
           </button>
         </form>
-        <p className="mt-4 text-sm text-center text-gray-600">
+        <p className="mt-4 text-center text-sm text-gray-600">
           Don't have an account?{" "}
           <Link to="/Signup" className="text-purple-800 hover:underline">
             Sign up

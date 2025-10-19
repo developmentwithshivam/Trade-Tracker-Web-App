@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBars,
   faRightToBracket,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import Loginbutton from "../Header/Loginbutton";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Logout from "../../Logout/Logout";
 import Dropdownprofile from "../Drapdownbox/Dropdownprofile";
 import AddPostButton from "../Button/Addpostbtn";
 import Logo from "../Logo/Logo";
+import { motion } from "motion/react";
+import Sidebar from "../../AuthenticatedComponent/Sidebar";
 // import LogoutIcon from '@mui/icons-material/Logout';
 // import Signup from "../OtherPages/Signup";
 // hello
@@ -39,32 +38,48 @@ function Header() {
     <>
       <header className="select-none">
         <nav className="shadow">
-          <div className="flex px-10 py-4  justify-between items-center">
+          <div className="flex w-screen items-center justify-between px-10 py-4">
             {/* Left */}
             <Logo textsize={"text-xl md:text-2xl"} />
             {/* Middle */}
-            <div className="lg:flex gap-10 hidden ">
-              <ul className="flex gap-5 ">
+            <div className="hidden w-[35rem] justify-around lg:flex">
+              <ul className="flex items-center justify-center gap-5">
                 {navitems.map((items) => {
                   return (
-                    <NavLink
-                      to={items.path}
-                      key={items.label}
-                      className={({ isActive }) => {
-                        return isActive
-                          ? "border-b-2 border-black py-2  cursor-pointer"
-                          : "border-b-2 border-transparent py-2 hover:border-black cursor-pointer";
-                      }}
-                    >
-                      {items.label}
-                    </NavLink>
+                    <li className="relative" key={items.label}>
+                      <NavLink
+                        to={items.path}
+                        className={({ isActive }) => {
+                          return `w-full cursor-pointer py-2 ${isActive ? "text-black" : "text-black"}`;
+                        }}
+                      >
+                        {({ isActive }) => (
+                          <>
+                            {items.label}
+                            {isActive && (
+                              <motion.div
+                                layoutId="underline"
+                                transition={
+                                  {
+                                    // type: "spring",
+                                    // stiffness: 500,
+                                    // damping: 30,
+                                  }
+                                }
+                                className="absolute h-[2px] w-full bg-black px-4"
+                              ></motion.div>
+                            )}
+                          </>
+                        )}
+                      </NavLink>
+                    </li>
                   );
                 })}
               </ul>
               {!user && (
                 <NavLink
                   to="Signup"
-                  className=" cursor-pointer bg-purple-800 text-white p-1 pl-7 pr-7 h-9 hover:bg-purple-900 rounded-md hidden lg:block"
+                  className="hidden cursor-pointer rounded-md bg-purple-800 p-2 text-white hover:bg-purple-900 lg:block"
                 >
                   Get Started
                 </NavLink>
@@ -72,18 +87,18 @@ function Header() {
             </div>
             {/* Right */}
             {islogin && (
-              <div className="flex justify-center items-center gap-5">
+              <div className="flex items-center justify-center gap-5">
                 <div className="hidden md:block">
                   <AddPostButton />
                 </div>
                 <div
-                  className="flex justify-center items-center gap-3 hover:cursor-pointer"
+                  className="flex items-center justify-center gap-3 hover:cursor-pointer"
                   onClick={() => {
                     changetogglebtn();
                   }}
                 >
                   <div>{user?.name}</div>
-                  <div className=" rounded-full bg-purple-800 w-8 h-8 flex justify-center items-center text-white">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-800 text-white">
                     {user?.name?.[0]}
                   </div>
                 </div>
@@ -94,25 +109,18 @@ function Header() {
             {!islogin && (
               <>
                 <Link to="/login" className="md:hidden">
-                  <button className="px-6 py-2 border bg-purple-800 text-white hover:bg-purple-50 font-semibold rounded-xl shadow cursor-pointer">
+                  <button className="cursor-pointer rounded-xl border bg-purple-800 px-6 py-2 font-semibold text-white shadow hover:bg-purple-50">
                     Login
                   </button>
                 </Link>
-                <div className="  md:flex gap-5 justify-evenly items-center  hidden">
-                  <Link to="/login" className="w-auto md:w-24 ">
+                <div className="hidden items-center justify-evenly gap-5 md:flex">
+                  <Link to="/login" className="w-auto md:w-24">
                     <Loginbutton word={"Login"} iconname={faRightToBracket} />
                   </Link>
 
-                  <Link to={"Signup"} className="w-auto md:w-28 ">
+                  <Link to={"Signup"} className="w-auto md:w-28">
                     <Loginbutton word={"SignUp"} iconname={faUserPlus} />
                   </Link>
-
-                  {/* <div className="lg:hidden flex justify-center items-center">
-                  <FontAwesomeIcon
-                    icon={faBars}
-                    className=" h-6 w-6 text-black hover:text-slate-300  cursor-pointer "
-                  />
-                </div> */}
                 </div>
               </>
             )}
