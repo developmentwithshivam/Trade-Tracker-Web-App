@@ -10,10 +10,13 @@ import LoadingSpinner from "./component/loading/loadingspinner.jsx";
 import { useQuery } from "@tanstack/react-query";
 import PathRouting from "./routing/PathRouting.jsx";
 import { Toaster } from "@/components/ui/sonner";
+import { useNavigate } from "react-router";
 
 function App() {
+  let isOnline = navigator.onLine;
   const islogin = useSelector((state) => state.login.islogin);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     isPending: loding,
@@ -30,11 +33,19 @@ function App() {
   useEffect(() => {
     if (data) {
       dispatch(setloginsession(data));
+    } else if (isError) {
+      if (isOnline) {
+        dispatch(removeloginsession());
+      }
     }
-    if (isError) {
-      dispatch(removeloginsession());
+    if (!isOnline) {
+      navigate("/nointernet", { replace: true });
+      console.log("no internet connected");
+      return;
+    } else {
+      navigate(islogin ? "home-feed" : "/");
     }
-  }, [data, isError]);
+  }, [data, isError, isOnline]);
 
   if (loding) {
     return (

@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import React, { useEffect, useState } from "react";
 import RightsidehomeFeed from "../RightsidehomeFeed";
+import Searchbar from "../Searchbar";
 function HomeFeed() {
   const [imagepreview, setimagepreview] = useState([]);
   const SkeletonCount = [0, 1];
@@ -45,6 +46,7 @@ function HomeFeed() {
 
   return (
     <>
+      <Searchbar />
       <div className="bg-gray-50 lg:flex">
         <div
           className={`no-scrollbar flex h-[92dvh] w-full justify-center pt-20 md:h-screen lg:w-4/6 ${imagepreview.length > 0 ? "overflow-y-auto" : "overflow-hidden"} `}
@@ -57,10 +59,8 @@ function HomeFeed() {
             </div>
           ) : (
             <div>
-              <div className="flex w-full flex-col gap-5">
+              <div className="flex w-full flex-col space-y-5">
                 {postData?.documents?.map((items, index) => {
-                  console.log(items);
-
                   return (
                     <div key={items.$id}>
                       <Card

@@ -9,7 +9,8 @@ import Trades from "../AuthenticatedComponent/AuthenticatedPages/Trades";
 import Layout from "../component/Layout/Layout";
 import Settings from "../AuthenticatedComponent/AuthenticatedPages/Settings";
 import Login from "../login/login.jsx";
-import Addpost from "@/AuthenticatedComponent/AuthenticatedPages/Addpost";
+import CreatePost from "@/AuthenticatedComponent/AuthenticatedPages/CreatePost";
+import Nointernet from "../pages/Nointernet";
 
 function PathRouting() {
   return (
@@ -26,16 +27,20 @@ function PathRouting() {
             <Route path="home-feed" element={<HomeFeed />} />
             <Route path="settings" element={<Settings />} />
             <Route path="trades" element={<Trades />} />
-            <Route path="add-post" element={<Addpost />} />
+            <Route path="creat-post" element={<CreatePost />} />
           </Route>
         </Route>
 
         <Route element={<NotProtectedRoute />}>
-          <Route path="login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Route>
-
+        {/* <Route path="/" element={<Render />}> */}
+        {!navigator.onLine && (
+          <Route path="nointernet" element={<Nointernet />} />
+        )}
+        {/* </Route> */}
         <Route path="*" element={<Notfound />} />
       </Routes>
     </>

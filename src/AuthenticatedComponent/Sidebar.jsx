@@ -14,7 +14,7 @@ const navItems = [
   { path: "/home-feed", label: "Home", icon: LayoutDashboard },
   { path: "/trades", label: "My Trades", icon: BarChart3 },
   { path: "/journal", label: "Journal", icon: FileText },
-  { path: "/add-post", label: "Add Post", icon: PlusCircle },
+  { path: "/creat-post", label: "Creat Post", icon: PlusCircle },
   { path: "/settings", label: "Settings", icon: Settings },
 ];
 

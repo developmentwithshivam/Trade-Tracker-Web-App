@@ -6,12 +6,12 @@ const client = new Client()
 
 const storage = new Storage(client);
 
-export const uploadimage = async (data) => {
+export const uploadimage = async (image) => {
   try {
     const res = await storage.createFile(
       conf.appwriteStorageId,
       ID.unique(),
-      data.image[0],
+      image,
     );
     return res;
   } catch (error) {
