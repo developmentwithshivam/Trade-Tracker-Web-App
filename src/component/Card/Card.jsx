@@ -40,6 +40,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Heart, MessageCircle, Share2 } from "lucide-react";
+import { PostDropdown } from "@/AuthenticatedComponent/PostDropdown";
 
 function Card({ index, cardImage, date, pairName, notes }) {
   return (
@@ -47,21 +48,23 @@ function Card({ index, cardImage, date, pairName, notes }) {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="w-full overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md md:w-lg"
+      className="w-full overflow-hidden rounded-2xl border-gray-200 bg-white md:w-lg md:border"
     >
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3">
-        <div>
-          <h2 className="text-lg font-semibold text-gray-800">{pairName}</h2>
-          <p className="text-sm text-gray-500">{date.slice(0, 10)}</p>
+        <div className="flex items-center justify-center gap-3">
+          <img
+            src="https://i.pravatar.cc/40"
+            alt="profile"
+            className="h-12 w-12 rounded-full border border-gray-300"
+          />
+          <h2 className="text-md font-semibold text-gray-800">{pairName}</h2>
         </div>
-        <button className="text-gray-500 transition hover:text-gray-800">
-          •••
-        </button>
+        <PostDropdown />
       </div>
 
       {/* Image */}
-      <div className="w-full bg-gray-50">
+      <div className="w-full">
         {cardImage && cardImage[index] && (
           <img
             src={cardImage[index]}
@@ -82,10 +85,11 @@ function Card({ index, cardImage, date, pairName, notes }) {
 
       {/* Notes */}
       <div className="px-4 pb-4">
-        <p className="text-sm text-gray-700">
+        <p className="pb-2 text-sm text-gray-700">
           <span className="font-semibold text-gray-900">{pairName}</span>{" "}
           {notes?.length > 0 ? notes : null}
         </p>
+        <p className="text-xs text-gray-500">{date.slice(0, 10)}</p>
       </div>
     </motion.div>
   );

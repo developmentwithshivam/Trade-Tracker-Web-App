@@ -14,8 +14,6 @@ function MobileBottomNavbar() {
   const menuItems = [
     { name: "Home", icon: <Home size={20} />, path: "/home-feed" },
     { name: "Search", icon: <Search size={20} />, path: "" },
-    { name: "Add", icon: <PlusCircle size={20} />, path: "/creat-post" },
-    { name: "Notifications", icon: <Bell size={20} />, path: "" },
     { name: "Profile", icon: <User size={20} />, path: "" },
   ];
 

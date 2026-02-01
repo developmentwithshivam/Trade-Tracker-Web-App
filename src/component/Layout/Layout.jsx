@@ -2,24 +2,25 @@ import React from "react";
 import { Outlet } from "react-router";
 import Header from "../Header/Headermain";
 import Pageloding from "../loading/Pageloding";
-import PostForm from "../PostForm/PostForm";
+// import PostForm from "../PostForm/PostForm";
 import { useSelector } from "react-redux";
 import Footer from "../Footer/Footer";
 import Sidebar from "@/AuthenticatedComponent/Sidebar";
 import MobileNavbar from "@/AuthenticatedComponent/MobileNavbar";
+import Computerheader from "@/AuthenticatedComponent/Computerheader";
 function Layout() {
   const islogin = useSelector((state) => state.login.islogin);
   const loding = useSelector((state) => state.logout.loding);
-  const FormIsOpen = useSelector((state) => state.postform.isopen);
+  // const FormIsOpen = useSelector((state) => state.postform.isopen);
   return (
     <>
       {loding && <Pageloding />}
       {islogin && (
         <div className="flex">
-          {FormIsOpen && <PostForm />}
-          <div className="flex h-screen w-screen overflow-hidden">
+          {/* {FormIsOpen && <PostForm />} */}
+          <div className="flex h-screen w-screen">
             <Sidebar />
-            <div className="relative h-full w-full">
+            <div className="relative h-full w-full md:overflow-hidden">
               <Outlet />
               <MobileNavbar />
             </div>

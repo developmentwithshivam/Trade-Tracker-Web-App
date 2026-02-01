@@ -6,7 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import React, { useEffect, useState } from "react";
 import RightsidehomeFeed from "../RightsidehomeFeed";
-import Searchbar from "../Searchbar";
+import Mobileheader from "../Mobileheader";
+import Computerheader from "../Computerheader";
 function HomeFeed() {
   const [imagepreview, setimagepreview] = useState([]);
   const SkeletonCount = [0, 1];
@@ -19,6 +20,7 @@ function HomeFeed() {
     queryKey: ["getAllPostData"],
     queryFn: fetchdata,
     refetchOnWindowFocus: false,
+    staleTime: 5 * 1000,
   });
 
   const {
@@ -30,7 +32,12 @@ function HomeFeed() {
     queryKey: ["getAllPostImage"],
     queryFn: fetchimage,
     refetchOnWindowFocus: false,
+    staleTime: 5 * 1000,
   });
+
+  if (postData) {
+    console.log(postData);
+  }
 
   useEffect(() => {
     const filesarr = postImageData?.files || [];
@@ -46,10 +53,15 @@ function HomeFeed() {
 
   return (
     <>
-      <Searchbar />
-      <div className="bg-gray-50 lg:flex">
+      <div className="hidden md:flex">
+        <Computerheader />
+      </div>
+      <div className="md:hidden">
+        <Mobileheader />
+      </div>
+      <div className="flex bg-white">
         <div
-          className={`no-scrollbar flex h-[92dvh] w-full justify-center pt-20 md:h-screen lg:w-4/6 ${imagepreview.length > 0 ? "overflow-y-auto" : "overflow-hidden"} `}
+          className={`no-scrollbar flex w-full justify-center bg-white pt-5 pb-20 md:h-screen md:pt-20 lg:w-4/6 ${imagepreview.length > 0 ? "overflow-y-auto" : "overflow-hidden"} `}
         >
           {isImageDataLoding ? (
             <div className="flex w-full flex-col gap-5 md:w-lg">
@@ -59,7 +71,7 @@ function HomeFeed() {
             </div>
           ) : (
             <div>
-              <div className="flex w-full flex-col space-y-5">
+              <div className="flex w-full flex-col gap-5">
                 {postData?.documents?.map((items, index) => {
                   return (
                     <div key={items.$id}>

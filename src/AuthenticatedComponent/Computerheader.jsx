@@ -1,7 +1,6 @@
 import React from "react";
-import { Search } from "lucide-react";
-
-function Searchbar() {
+import { Heart, Plus, Search } from "lucide-react";
+function Computerheader() {
   return (
     <div className="absolute flex w-full items-center justify-between bg-white px-4 py-3 shadow-sm">
       {/* Middle: Search Bar */}
@@ -26,4 +25,4 @@ function Searchbar() {
   );
 }
 
-export default Searchbar;
+export default Computerheader;

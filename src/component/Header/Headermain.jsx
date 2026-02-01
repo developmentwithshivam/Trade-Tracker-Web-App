@@ -7,7 +7,7 @@ import Loginbutton from "../Header/Loginbutton";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Dropdownprofile from "../Drapdownbox/Dropdownprofile";
-import AddPostButton from "../Button/Addpostbtn";
+// import AddPostButton from "../Button/Addpostbtn";
 import Logo from "../Logo/Logo";
 import { motion } from "motion/react";
 import Sidebar from "../../AuthenticatedComponent/Sidebar";

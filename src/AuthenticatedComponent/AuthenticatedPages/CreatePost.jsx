@@ -14,6 +14,9 @@ import { useForm, Controller, FormProvider } from "react-hook-form";
 import { DateAndTimePicker } from "@/component/DateAndTime/DateAndTimePicker";
 import { uploadData } from "@/appwrite/Database/database";
 import { uploadimage } from "@/appwrite/Storage/storage";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import LoadingSpinner from "@/component/loading/loadingspinner";
+import { Navigate } from "react-router";
 
 export default function CreatePost() {
   // const {
@@ -28,9 +31,12 @@ export default function CreatePost() {
     reset,
     formState: { errors },
   } = methods;
+
+  const queryClient = useQueryClient();
   // const { register, handleSubmit } = methods;
   // const { register, handleSubmit, control } = useForm();
   const [image, setImage] = useState(null);
+  const [clearImage, setclearImage] = useState(0);
   // const [caption, setCaption] = useState("");
   // const InputFields = [
   //   {
@@ -46,21 +52,33 @@ export default function CreatePost() {
     }
   };
 
+  // mutation function to update the data and image to database
+  const mutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await uploadData(data);
+      const responseImage = await uploadimage(data.image);
+      console.log(data);
+    },
+    onSuccess: () => {
+      console.log("its running");
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["getAllPostData"] });
+      queryClient.invalidateQueries({ queryKey: ["getAllPostImage"] });
+      // reset all form field
+    },
+  });
+
+  // mutation function call
   const onsubmit = async (data) => {
-    // console.log("submit");
-    // console.log(data);
-
-    const response = await uploadData(data);
-    const responseImage = await uploadimage(data.image);
-    console.log(data);
-    reset({
-      pair: "",
-      notes: "",
-      image: "",
-    });
-    setImage(null);
+    await mutation.mutateAsync(data);
+    // reset({
+    //   pair: "",
+    //   notes: "",
+    // });
+    // setclearImage((prev) => prev + 1);
+    // setImage(null);
+    <Navigate to="/tasks" />;
   };
-
   return (
     <Card className="mx-auto h-full max-w-full space-y-4 overflow-y-auto pb-20 md:pb-0">
       <CardHeader className="flex items-center justify-between">
@@ -70,7 +88,16 @@ export default function CreatePost() {
           className="w-20 rounded-full md:hidden"
           onClick={handleSubmit(onsubmit)}
         >
-          <ArrowRight />
+          {mutation.isPending ? (
+            <LoadingSpinner
+              divheight={"h-full"}
+              thickness={"border-4"}
+              size={"h-6 w-6"}
+              colour={"border-white"}
+            />
+          ) : (
+            <ArrowRight />
+          )}
         </Button>
       </CardHeader>
       <FormProvider {...methods}>
@@ -141,6 +168,7 @@ export default function CreatePost() {
                 <Controller
                   control={control}
                   name="image"
+                  key={clearImage}
                   rules={{
                     required: true,
                   }}
@@ -187,7 +215,16 @@ export default function CreatePost() {
 
           <CardFooter className="mt-5 mb-10 hidden justify-end md:flex">
             <Button type="submit" className="w-full cursor-pointer">
-              Post
+              {mutation.isPending ? (
+                <LoadingSpinner
+                  divheight={"h-full"}
+                  thickness={"border-4"}
+                  size={"h-6 w-6"}
+                  colour={"border-white"}
+                />
+              ) : (
+                "Post"
+              )}
             </Button>
           </CardFooter>
         </form>

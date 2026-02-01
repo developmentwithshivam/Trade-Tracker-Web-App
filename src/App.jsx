@@ -13,7 +13,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { useNavigate } from "react-router";
 
 function App() {
-  let isOnline = navigator.onLine;
+  // let isOnline = navigator.onLine;
+  const [isOnline, setisOnline] = useState(navigator.onLine);
   const islogin = useSelector((state) => state.login.islogin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ function App() {
     isPending: loding,
     isError,
     data,
-    error,
   } = useQuery({
     queryKey: ["getuserinfo"],
     queryFn: getuser,
@@ -30,22 +30,42 @@ function App() {
     refetchOnWindowFocus: false,
   });
 
+  // saperate these useeffect and fix the no-internet;
+  // Internet checking
   useEffect(() => {
-    if (data) {
-      dispatch(setloginsession(data));
-    } else if (isError) {
-      if (isOnline) {
-        dispatch(removeloginsession());
-      }
-    }
+    const setonline = () => {
+      setisOnline(navigator.onLine);
+    };
+    window.addEventListener("online", setonline);
+    window.addEventListener("offline", setonline);
+
+    return () => {
+      window.addEventListener("online", setonline);
+      window.addEventListener("offline", setonline);
+    };
+  }, []);
+
+  // Routing for No internet
+  useEffect(() => {
     if (!isOnline) {
       navigate("/nointernet", { replace: true });
       console.log("no internet connected");
       return;
     } else {
-      navigate(islogin ? "home-feed" : "/");
+      navigate(islogin ? "home-feed" : "/", { replace: true });
     }
-  }, [data, isError, isOnline]);
+  }, [isOnline]);
+
+  // Authentication of user
+  useEffect(() => {
+    if (isOnline) {
+      if (data) {
+        dispatch(setloginsession(data));
+      } else if (isError) {
+        dispatch(removeloginsession());
+      }
+    }
+  }, [data, isError]);
 
   if (loding) {
     return (

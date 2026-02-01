@@ -7,43 +7,32 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 function Home() {
   const islogin = useSelector((state) => state.login.islogin);
-  const isupdated = useSelector((state) => state.postform.isupdated);
+  // const isupdated = useSelector((state) => state.postform.isupdated);
   let images = [];
 
-  // const {
-  //   isPending: loding,
-  //   isError,
-  //   data,
-  //   error,
-  // } = useQuery({
-  //   queryKey: ["getData"],
-  //   queryFn: fetchdata,
-  //   refetchOnWindowFocus: false,
-  // });
+  // const onMount = async () => {
+  //   const data = await fetchdata();
 
-  const onMount = async () => {
-    const data = await fetchdata();
+  //   setcardDetails(data.documents);
 
-    setcardDetails(data.documents);
+  //   images = await fetchimage();
+  //   const imagearray = images?.files || [];
 
-    images = await fetchimage();
-    const imagearray = images?.files || [];
+  //   const promisearray = imagearray?.map((items) => {
+  //     const id = String(items.$id);
+  //     return getpreview(id);
+  //   });
 
-    const promisearray = imagearray?.map((items) => {
-      const id = String(items.$id);
-      return getpreview(id);
-    });
+  //   setcardImage(await Promise.all(promisearray));
 
-    setcardImage(await Promise.all(promisearray));
+  //   setLoding(false);
+  // };
 
-    setLoding(false);
-  };
-
-  useEffect(() => {
-    if (islogin) {
-      onMount();
-    }
-  }, [isupdated, islogin]);
+  // useEffect(() => {
+  //   if (islogin) {
+  //     onMount();
+  //   }
+  // }, [isupdated, islogin]);
 
   return islogin ? (
     <>{/* <Feed /> */}</>

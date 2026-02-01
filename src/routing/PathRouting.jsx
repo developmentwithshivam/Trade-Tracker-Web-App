@@ -16,6 +16,7 @@ function PathRouting() {
   return (
     <>
       <Routes>
+        {/* Header, Page, Footer */}
         <Route path="/" element={<Layout />}>
           <Route element={<NotProtectedRoute />}>
             <Route path="" element={<Home />} />
@@ -31,6 +32,7 @@ function PathRouting() {
           </Route>
         </Route>
 
+        {/* single page Route */}
         <Route element={<NotProtectedRoute />}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

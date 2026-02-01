@@ -24,6 +24,7 @@ export const uploadData = async ({ pair, date, notes }) => {
 
 export const fetchdata = async () => {
   try {
+    console.log("Fetching data");
     const data = await databases.listDocuments(
       conf.appwriteDatabaseId,
       conf.appwriteCollectionId,
