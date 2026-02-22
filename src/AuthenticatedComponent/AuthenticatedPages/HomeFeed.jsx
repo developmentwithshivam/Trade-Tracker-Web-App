@@ -81,6 +81,7 @@ function HomeFeed() {
                         date={items.Date}
                         pairName={items.Pair}
                         notes={items.Notes}
+                        items={items}
                       />
                     </div>
                   );

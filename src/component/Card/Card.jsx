@@ -42,7 +42,7 @@ import { motion } from "framer-motion";
 import { Heart, MessageCircle, Share2 } from "lucide-react";
 import { PostDropdown } from "@/AuthenticatedComponent/PostDropdown";
 
-function Card({ index, cardImage, date, pairName, notes }) {
+function Card({ index, cardImage, date, pairName, notes, items }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -60,7 +60,7 @@ function Card({ index, cardImage, date, pairName, notes }) {
           />
           <h2 className="text-md font-semibold text-gray-800">{pairName}</h2>
         </div>
-        <PostDropdown />
+        <PostDropdown items={items} />
       </div>
 
       {/* Image */}

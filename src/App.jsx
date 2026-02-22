@@ -6,7 +6,7 @@ import {
   setloginsession,
 } from "./redux/slice/login/loginSlice.js";
 import { getuser } from "./appwrite/auth.js";
-import LoadingSpinner from "./component/loading/loadingspinner.jsx";
+import LoadingSpinner from "./component/loading/Loadingspinner.jsx";
 import { useQuery } from "@tanstack/react-query";
 import PathRouting from "./routing/PathRouting.jsx";
 import { Toaster } from "@/components/ui/sonner";

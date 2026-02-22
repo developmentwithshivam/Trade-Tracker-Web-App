@@ -9,10 +9,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { PencilIcon, ShareIcon, TrashIcon } from "lucide-react";
-import { useNavigate } from "react-router";
+import { DeleteAlert } from "./DeleteAlert";
 
-export function PostDropdown() {
-  const navigate = useNavigate();
+export function PostDropdown({ items }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -33,9 +32,9 @@ export function PostDropdown() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem variant="destructive">
-            <TrashIcon />
-            Delete
+          <DropdownMenuItem asChild variant="destructive">
+            <DeleteAlert items={items} />
+            {/* Delete */}
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

@@ -15,8 +15,8 @@ import { DateAndTimePicker } from "@/component/DateAndTime/DateAndTimePicker";
 import { uploadData } from "@/appwrite/Database/database";
 import { uploadimage } from "@/appwrite/Storage/storage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import LoadingSpinner from "@/component/loading/loadingspinner";
-import { Navigate } from "react-router";
+import LoadingSpinner from "@/component/loading/Loadingspinner";
+import { Navigate, useNavigate } from "react-router";
 
 export default function CreatePost() {
   // const {
@@ -24,6 +24,8 @@ export default function CreatePost() {
   //   handleSubmit,
   //   formState: { errors },
   // } = useForm();
+  const navigate = useNavigate();
+
   const methods = useForm();
   const {
     handleSubmit,
@@ -56,8 +58,11 @@ export default function CreatePost() {
   const mutation = useMutation({
     mutationFn: async (data) => {
       const response = await uploadData(data);
-      const responseImage = await uploadimage(data.image);
+      const id = response.$id;
+      console.log(id);
+      const responseImage = await uploadimage(data.image, id);
       console.log(data);
+      console.log(responseImage.$id);
     },
     onSuccess: () => {
       console.log("its running");
@@ -77,7 +82,7 @@ export default function CreatePost() {
     // });
     // setclearImage((prev) => prev + 1);
     // setImage(null);
-    <Navigate to="/tasks" />;
+    navigate("/home-feed");
   };
   return (
     <Card className="mx-auto h-full max-w-full space-y-4 overflow-y-auto pb-20 md:pb-0">
